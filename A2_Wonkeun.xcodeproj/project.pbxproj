@@ -15,6 +15,7 @@
 		8A08DF9A290E3DF6004334D2 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A08DF99290E3DF6004334D2 /* Reservation.swift */; };
 		8A08DF9C290E40A3004334D2 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A08DF9B290E40A3004334D2 /* ReservationViewController.swift */; };
 		8A08DF9D290E4677004334D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A08DF93290E2AA6004334D2 /* Main.storyboard */; };
+		8A08DF9F290F6A0C004334D2 /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A08DF9E290F6A0C004334D2 /* ReservationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8A08DF94290E2AA6004334D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A08DF99290E3DF6004334D2 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		8A08DF9B290E40A3004334D2 /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		8A08DF9E290F6A0C004334D2 /* ReservationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +65,13 @@
 				8A08DF07290D8861004334D2 /* AppDelegate.swift */,
 				8A08DF09290D8861004334D2 /* SceneDelegate.swift */,
 				8A08DF0B290D8861004334D2 /* ViewController.swift */,
+				8A08DF99290E3DF6004334D2 /* Reservation.swift */,
 				8A08DF10290D8862004334D2 /* Assets.xcassets */,
 				8A08DF12290D8862004334D2 /* LaunchScreen.storyboard */,
 				8A08DF15290D8862004334D2 /* Info.plist */,
 				8A08DF93290E2AA6004334D2 /* Main.storyboard */,
-				8A08DF99290E3DF6004334D2 /* Reservation.swift */,
 				8A08DF9B290E40A3004334D2 /* ReservationViewController.swift */,
+				8A08DF9E290F6A0C004334D2 /* ReservationTableViewCell.swift */,
 			);
 			path = A2_Wonkeun;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			files = (
 				8A08DF9C290E40A3004334D2 /* ReservationViewController.swift in Sources */,
 				8A08DF0C290D8861004334D2 /* ViewController.swift in Sources */,
+				8A08DF9F290F6A0C004334D2 /* ReservationTableViewCell.swift in Sources */,
 				8A08DF08290D8861004334D2 /* AppDelegate.swift in Sources */,
 				8A08DF9A290E3DF6004334D2 /* Reservation.swift in Sources */,
 				8A08DF0A290D8861004334D2 /* SceneDelegate.swift in Sources */,
