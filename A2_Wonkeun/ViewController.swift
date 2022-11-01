@@ -8,13 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    //MARK: RESERVATION_DATA
-    var reservationList = [
-        Reservation(id: 1, name: "Jenny", airportDeparture: "Toronto - YYZ", airportArrival: "Frankfurt - FRK", date: Calendar.current.date(from: DateComponents(year: 2011, month: 1, day: 2)) ?? Date(), cost: 420.15),
-        Reservation(id: 2, name: "Jenny", airportDeparture: "Toronto - YYZ", airportArrival: "Honululu - HNN", date: Calendar.current.date(from: DateComponents(year: 2011, month: 1, day: 2)) ?? Date(), cost: 420.15),
-        Reservation(id: 3, name: "Jenny", airportDeparture: "Toronto - YYZ", airportArrival: "Los Angeles - LAX", date: Calendar.current.date(from: DateComponents(year: 2011, month: 1, day: 2)) ?? Date(), cost: 420.15),
-        Reservation(id: 4, name: "Jenny", airportDeparture: "Toronto - YYZ", airportArrival: "Barcelona - BAR", date: Calendar.current.date(from: DateComponents(year: 2011, month: 1, day: 2)) ?? Date(), cost: 420.15),
-    ]
+    //MARK: DATA_MEMBER
+//    var reservationList = [
+//        Reservation(name: "John Doe", airportDeparture: "Toronto - YYZ", airportArrival: "Quebec City - YQB", date: Calendar.current.date(from: DateComponents(year: 2011, month: 11, day: 2)) ?? Date(), cost: 220.15),
+//        Reservation(name: "John Doe", airportDeparture: "Halifax - YHZ", airportArrival: "Toronto - YYZ", date: Calendar.current.date(from: DateComponents(year: 2012, month: 4, day: 12)) ?? Date(), cost: 338.85),
+//        Reservation(name: "John Doe", airportDeparture: "Toronto - YYZ", airportArrival: "Edmonton - YEG", date: Calendar.current.date(from: DateComponents(year: 2013, month: 7, day: 4)) ?? Date(), cost: 276.22),
+//    ]
     var totalCost:Double = 0;
     
     //MARK: OUTLET
@@ -24,8 +23,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK: TABLE_VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Total number of reservation: \(reservationList.count)")
-        return reservationList.count
+        print("Total number of reservation: \(Datasource.shared.reservationList.count)")
+        return Datasource.shared.reservationList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,14 +32,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = reservationTableView.dequeueReusableCell(withIdentifier: "myReservation", for: indexPath) as! ReservationTableViewCell
         
+        //HANDLE NO RESERVATION - No reservation in user history
 //        if cell == nil {
 //            cell = UITableViewCell(
 //                style: UITableViewCell.CellStyle.default, reuseIdentifier: "myReservation"
 //                )
 //        }
         
-        let currReservation:Reservation = reservationList[indexPath.row]
+        let currReservation:Reservation = Datasource.shared.reservationList[indexPath.row]
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.long
         print("Departure: \(currReservation.airportDeparture), Arrival: \(currReservation.airportArrival), Name: \(currReservation.name), Date: \(dateFormatter.string(from: currReservation.date))" )
         cell.lblDeparture.text = currReservation.airportDeparture
         cell.lblArrival.text = currReservation.airportArrival

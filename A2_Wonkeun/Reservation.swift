@@ -8,15 +8,15 @@
 import Foundation
 
 class Reservation {
-    var id: Int
+    static var id: Int = 0
     var name: String
     var airportDeparture: String
     var airportArrival: String
     var date: Date
     var cost: Double
     
-    init(id: Int, name: String, airportDeparture: String, airportArrival: String, date: Date, cost: Double){
-        self.id = id
+    init(name: String, airportDeparture: String, airportArrival: String, date: Date, cost: Double){
+        Reservation.id += 1
         self.name = name
         self.airportDeparture = airportDeparture
         self.airportArrival = airportArrival
