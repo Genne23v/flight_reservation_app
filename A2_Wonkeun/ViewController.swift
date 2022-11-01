@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let currReservation:Reservation = Datasource.shared.reservationList[indexPath.row]
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
-        print("Departure: \(currReservation.airportDeparture), Arrival: \(currReservation.airportArrival), Name: \(currReservation.name), Date: \(dateFormatter.string(from: currReservation.date))" )
+        print("ID: \(currReservation.id), Departure: \(currReservation.airportDeparture), Arrival: \(currReservation.airportArrival), Name: \(currReservation.name), Date: \(dateFormatter.string(from: currReservation.date))" )
         cell.lblDeparture.text = currReservation.airportDeparture
         cell.lblArrival.text = currReservation.airportArrival
         cell.lblName.text = currReservation.name
@@ -66,6 +66,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidAppear(_ animated: Bool) {
         print("view did appear")
+        self.reservationTableView.reloadData()
         totalCostLabel.text = "$ " + String(format: "%.2f", totalCost)
     }
     

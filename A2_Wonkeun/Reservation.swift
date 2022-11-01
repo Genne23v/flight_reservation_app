@@ -8,7 +8,8 @@
 import Foundation
 
 class Reservation {
-    static var id: Int = 0
+    static var idGenerator:Int = 0
+    var id: Int = 0
     var name: String
     var airportDeparture: String
     var airportArrival: String
@@ -16,7 +17,8 @@ class Reservation {
     var cost: Double
     
     init(name: String, airportDeparture: String, airportArrival: String, date: Date, cost: Double){
-        Reservation.id += 1
+        Reservation.idGenerator += 1
+        self.id = Reservation.idGenerator
         self.name = name
         self.airportDeparture = airportDeparture
         self.airportArrival = airportArrival
