@@ -8,17 +8,19 @@
 import UIKit
 
 class ReservationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    //MARK: DATA_SOURCE
+    //MARK: CLASS_VARIABLES
     let TORONTO = "Toronto - YYZ"
     let WINNIPEG = "Winnipeg - YWG"
     let VANCOUVER = "Vancouver - YVR"
     let MONTREAL = "Montreal - YUL"
+    let TAX_RATE:Double = 0.13
+    let COST_PER_KM:Double = 0.32
     var dateOfFlight:String = ""
     var departureAirport:String = ""
     var arrivalAirport:String = ""
-    let TAX_RATE:Double = 0.13
-    let COST_PER_KM:Double = 0.32
     
+    
+    //MARK: PICKERVIEW_FUNCTIONS
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -33,14 +35,8 @@ class ReservationViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        print("pickerview returning the selected row")
         if pickerView.tag == 1 {
             departureAirport = Datasource.shared.departureAirportList[row]
-//            if departureAirport == TORONTO {
-//                Datasource.shared.arrivalAirportList = [MONTREAL, VANCOUVER]
-//            } else {
-//                Datasource.shared.arrivalAirportList = [TORONTO]
-//            }
             return departureAirport
         } else {
             arrivalAirport = Datasource.shared.arrivalAirportList[row]
@@ -49,7 +45,7 @@ class ReservationViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var selectedIndex = departPortPicker.selectedRow(inComponent: 0)
+        let selectedIndex = departPortPicker.selectedRow(inComponent: 0)
         print("Selected index: \(selectedIndex)")
         if selectedIndex == 0 {
             Datasource.shared.arrivalAirportList = [VANCOUVER, MONTREAL]
@@ -59,6 +55,7 @@ class ReservationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         arrivalPortPicker.reloadAllComponents()
     }
 
+    
     //MARK: OUTLET
     @IBOutlet weak var guestName: UITextField!
     @IBOutlet weak var flightDatePicker: UIDatePicker!
@@ -116,11 +113,20 @@ class ReservationViewController: UIViewController, UIPickerViewDelegate, UIPicke
         let newReservation = Reservation(name: guestName ?? "", airportDeparture: departureAirport, airportArrival: arrivalAirport, date: Date(), cost: cost)
         Datasource.shared.reservationList.insert(newReservation, at: 0)
         
-//        if let navigationController = self.window?.rootViewController as? UINavigationController {
-//            self.navigationController?.popToRootViewController(animated: true)
-//        }
-
         //RESERVATION COMPLETE MESSAGE
+        let popup = UIAlertController(title: "Thank you!", message: "Reservation has been made successfully.", preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "OK", style: .default)
+        popup.addAction(closeAction)
+        present(popup, animated: true, completion: nil)
+        
         print("The number of reservations: \(Datasource.shared.reservationList.count)")
+        
+        self.guestName.text = ""
+        self.flightDatePicker.date = Date()
+        Datasource.shared.departureAirportList = [TORONTO, WINNIPEG]
+        Datasource.shared.arrivalAirportList = [VANCOUVER, MONTREAL]
+        arrivalPortPicker.reloadAllComponents()
+        self.departPortPicker.selectRow(0, inComponent: 0, animated: true)
+        self.arrivalPortPicker.selectRow(0, inComponent: 0, animated: true)
     }
 }

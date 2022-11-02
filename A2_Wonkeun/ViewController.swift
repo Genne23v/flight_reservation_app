@@ -9,12 +9,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: DATA_MEMBER
-//    var reservationList = [
-//        Reservation(name: "John Doe", airportDeparture: "Toronto - YYZ", airportArrival: "Quebec City - YQB", date: Calendar.current.date(from: DateComponents(year: 2011, month: 11, day: 2)) ?? Date(), cost: 220.15),
-//        Reservation(name: "John Doe", airportDeparture: "Halifax - YHZ", airportArrival: "Toronto - YYZ", date: Calendar.current.date(from: DateComponents(year: 2012, month: 4, day: 12)) ?? Date(), cost: 338.85),
-//        Reservation(name: "John Doe", airportDeparture: "Toronto - YYZ", airportArrival: "Edmonton - YEG", date: Calendar.current.date(from: DateComponents(year: 2013, month: 7, day: 4)) ?? Date(), cost: 276.22),
-//    ]
-    var totalCost:Double = 0;
+    var totalCost:Double = 0.0
+    
     
     //MARK: OUTLET
     @IBOutlet weak var reservationTableView: UITableView!
@@ -27,12 +23,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return Datasource.shared.reservationList.count
     }
     
+    
+    //MARK: TABLEVIEW_FUNCTIONS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Building cells...")
+        print("Building cells... total cost: \(totalCost)")
         
         let cell = reservationTableView.dequeueReusableCell(withIdentifier: "myReservation", for: indexPath) as! ReservationTableViewCell
         
         //HANDLE NO RESERVATION - No reservation in user history
+        
 //        if cell == nil {
 //            cell = UITableViewCell(
 //                style: UITableViewCell.CellStyle.default, reuseIdentifier: "myReservation"
@@ -48,15 +47,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.lblName.text = currReservation.name
         cell.lblDate.text = dateFormatter.string(from: currReservation.date)
         cell.lblCost.text = "$ " + String(format: "%.2f", currReservation.cost)
-        totalCost += currReservation.cost
         
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return 1
     }
     
+    
+    //MARK: VIEW_LIFECYCLE_HANDLERS
     override func viewDidLoad() {
         super.viewDidLoad()
         reservationTableView.delegate = self
@@ -66,9 +66,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidAppear(_ animated: Bool) {
         print("view did appear")
+        totalCost = 0
+        for each in Datasource.shared.reservationList {
+            totalCost += each.cost
+        }
         self.reservationTableView.reloadData()
         totalCostLabel.text = "$ " + String(format: "%.2f", totalCost)
     }
+    
     
     //MARK: EVENT_HANDLER
     @IBAction func btnToMakeReservation(_ sender: Any) {
