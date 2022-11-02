@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tww-VN-dKV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tww-VN-dKV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +19,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wCQ-OD-0yK">
                                 <rect key="frame" x="0.0" y="153" width="414" height="638"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myReservation" rowHeight="170" id="otf-BA-zQf" customClass="ReservationTableViewCell" customModule="A2_Wonkeun">
                                         <rect key="frame" x="0.0" y="50" width="414" height="170"/>
@@ -98,27 +98,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z1-Am-nRE">
-                                <rect key="frame" x="20" y="110" width="213" height="35"/>
+                                <rect key="frame" x="16" y="110" width="222" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="+ Make New Reservation"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+ Create New Reservation"/>
                                 <connections>
                                     <action selector="btnToMakeReservation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EuL-xX-aSL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You have no travel history yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTG-IC-k7I">
+                                <rect key="frame" x="18" y="363" width="378" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Reservation List" id="2qh-a7-Blw"/>
                     <connections>
+                        <outlet property="noReservationMessage" destination="cTG-IC-k7I" id="qOB-dq-cNQ"/>
                         <outlet property="reservationTableView" destination="wCQ-OD-0yK" id="qo6-3b-7bS"/>
                         <outlet property="totalCostLabel" destination="205-SH-9mU" id="mw0-L5-5zL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3674" y="-29"/>
+            <point key="canvasLocation" x="3673.913043478261" y="-29.464285714285712"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yh6-dh-jKe">
@@ -222,7 +230,9 @@
                         <viewLayoutGuide key="safeArea" id="J3D-47-qfa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Make a Reservation" id="nWp-NY-f8H"/>
+                    <navigationItem key="navigationItem" title="Make a Reservation" leftItemsSupplementBackButton="YES" id="nWp-NY-f8H">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="qjb-Iz-7E9"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="arrivalPortPicker" destination="PLC-iz-Zka" id="NcV-wh-2c9"/>
                         <outlet property="dateErrorMessage" destination="bTP-tY-zax" id="Ypo-im-uhr"/>
@@ -242,6 +252,9 @@
         <image name="at" catalog="system" width="128" height="125"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

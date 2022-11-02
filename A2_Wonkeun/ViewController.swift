@@ -15,11 +15,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: OUTLET
     @IBOutlet weak var reservationTableView: UITableView!
     @IBOutlet weak var totalCostLabel: UILabel!
-
+    @IBOutlet weak var noReservationMessage: UILabel!
+    
     
     //MARK: TABLE_VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Total number of reservation: \(Datasource.shared.reservationList.count)")
         return Datasource.shared.reservationList.count
     }
     
@@ -30,18 +30,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = reservationTableView.dequeueReusableCell(withIdentifier: "myReservation", for: indexPath) as! ReservationTableViewCell
         
-        //HANDLE NO RESERVATION - No reservation in user history
-        
-//        if cell == nil {
-//            cell = UITableViewCell(
-//                style: UITableViewCell.CellStyle.default, reuseIdentifier: "myReservation"
-//                )
-//        }
-        
         let currReservation:Reservation = Datasource.shared.reservationList[indexPath.row]
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.long
-        print("ID: \(currReservation.id), Departure: \(currReservation.airportDeparture), Arrival: \(currReservation.airportArrival), Name: \(currReservation.name), Date: \(dateFormatter.string(from: currReservation.date))" )
+        
+        //Build each table cell
         cell.lblDeparture.text = currReservation.airportDeparture
         cell.lblArrival.text = currReservation.airportArrival
         cell.lblName.text = currReservation.name
@@ -61,11 +55,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         reservationTableView.delegate = self
         reservationTableView.dataSource = self
-        print("Loading app...")
+        
+        //Update back button text
+        let backBtn = UIBarButtonItem()
+        backBtn.title = "Cancel"
+        navigationItem.backBarButtonItem = backBtn
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("view did appear")
+        //Show error message if there is no reservation
+        if Datasource.shared.reservationList.count == 0 {
+            noReservationMessage.text = "You have no travel history yet"
+        } else {
+            noReservationMessage.text = ""
+        }
+
+        //Refresh the total cost and update
         totalCost = 0
         for each in Datasource.shared.reservationList {
             totalCost += each.cost
